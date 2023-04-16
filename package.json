@@ -18,6 +18,7 @@
   "dependencies": {
     "hyphen": "^1.6.5",
     "json": "^11.0.0",
+    "json-server-auth": "^2.1.0",
     "server": "^1.0.38"
   },
   "name": "tscf",

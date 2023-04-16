@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{asset('plugins/jqvmap/jqvmap.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Daterange picker -->
@@ -223,6 +224,24 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.tag.index')}}" class="nav-link">
+                            <i class="nav-icon fa-solid fa-tag"></i>
+                            <p>
+                                Теги
+
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.post.index')}}" class="nav-link">
+                            <i class="nav-icon fa-solid fa-address-card"></i>
+                            <p>
+                                Посты
+
+                            </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -271,11 +290,35 @@
 <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->
 <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<script src="{{asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+    });
+    $(function () {
+        bsCustomFileInput.init();
+    });
+</script>
+<style>
+    .custom-file-input:lang(en)~.custom-file-label::after {
+        content: ". . .";
+    }
+</style>
 </body>
 </html>
