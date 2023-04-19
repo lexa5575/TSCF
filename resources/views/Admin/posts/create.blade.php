@@ -25,13 +25,14 @@
 
                 <div class="col-12">
                     <h4 class="mb-3">Добавить Пост</h4>
-                    <form action="{{route('admin.post.store')}}" method="post" class="w-100" enctype="multipart/form-data">
+                    <form action="{{route('admin.post.store')}}" method="post" class="w-100"
+                          enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Name</label>
                                 <input type="text" name="title" class="form-control" placeholder="Your name"
-                                value="{{old('title')}}">
+                                       value="{{old('title')}}">
                                 @error('title')
                                 <div class="text-danger">Ошибка</div>
                                 @enderror
@@ -80,8 +81,18 @@
                                         <select class="form-control" name="category_id">
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}"
-                                                    {{$category->id == old('$category_id') ? ' selected' : ''}}>
+                                                    {{$category->id == old('$category_id') ? ' selected' : '' }}>
                                                     {{$category->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tеги</label>
+                                        <select class="select2" name="tag_ids[]" multiple="multiple" data-placeholder="Выберите теги" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">
+                                            @foreach($tags as $tag)
+
+                                                <option value="{{$tag->id}}">{{$tag->title}}</option>
+
                                             @endforeach
                                         </select>
                                     </div>
