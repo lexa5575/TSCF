@@ -25,7 +25,7 @@
 
                 <div class="col-12">
                     <h4 class="mb-3">Добавить Пост</h4>
-                    <form action="{{route('admin.post.update', $post->id)}}" method="post">
+                    <form action="{{route('admin.post.update', $post->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('patch')
                         <div class="card-body">
@@ -34,18 +34,18 @@
                                 <input type="text" name="title" class="form-control" placeholder="Your name"
                                 value="{{$post->title}}">
                                 @error('title')
-                                <div class="text-danger">Ошибка</div>
+                                <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <textarea id="summernote" name="content">{{$post->content}}</textarea>
                                 @error('content')
-                                <div class="text-danger">Ошибка</div>
+                                <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="form-group w-50">
                                 <label for="exampleInputFile">Добавить превтю</label>
-                                <div class="w-25">
+                                <div class="w-50 mb-2">
                                     <img src="{{asset('storage/'.$post->preview_image)}}" alt="preview_image" class="w-50">
                                 </div>
                                 <div class="input-group">
@@ -58,12 +58,12 @@
                                     </div>
                                 </div>
                                 @error('preview_image')
-                                <div class="text-danger">Ошибка</div>
+                                <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="form-group w-50">
                                 <label for="exampleInputFile">Добавить изображение</label>
-                                <div class="w-25">
+                                <div class="w-50 mb-2">
                                     <img src="{{url('storage/'.$post->main_image)}}" alt="main_image" class="w-50">
                                 </div>
                                 <div class="input-group">
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                                 @error('main_image')
-                                <div class="text-danger">Ошибка</div>
+                                <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="row">
@@ -91,6 +91,9 @@
                                                     {{$category->title}}</option>
                                             @endforeach
                                         </select>
+                                        @error('category_id')
+                                        <div class="text-danger">{{$message}}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label>Tеги</label>
@@ -101,15 +104,18 @@
 
                                             @endforeach
                                         </select>
+                                        @error('tag_ids')
+                                        <div class="text-danger">{{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="ml-3">
+                                <button type="submit" class="btn btn-primary">Reload</button>
                             </div>
                         </div>
                         <!-- /.card-body -->
 
-                        <div class="ml-3">
-                            <button type="submit" class="btn btn-primary">Reload</button>
-                        </div>
                     </form>
                 </div>
 
