@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -53,6 +53,19 @@
                                 <div class="text-danger">Ошибка</div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Выберите роль</label>
+                            <select class="form-control" name="role">
+                                @foreach($roles as  $id => $role)
+                                    <option value="{{$id}}"
+                                        {{$id == old('$role_id') ? ' selected' : '' }}>
+                                        {{$role}}</option>
+                                @endforeach
+                            </select>
+                            @error('role')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
                         </div>
 
                         <div class="ml-3">

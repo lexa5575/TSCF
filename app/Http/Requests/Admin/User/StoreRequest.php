@@ -25,6 +25,7 @@ class StoreRequest extends FormRequest
             'name' => 'required|string',
             'email' => 'email|required|string|unique:users',
             'password' => 'required|string',
+            'role' => 'required|integer',
         ];
     }
     public function messages()

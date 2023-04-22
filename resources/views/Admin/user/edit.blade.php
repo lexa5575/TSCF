@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Edit Categories</h1>
+
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -24,7 +24,7 @@
             <div class="container-fluid">
 
                 <div class="col-12">
-                    <h4 class="mb-3">Добавить пользователя</h4>
+                    <h4 class="mb-3">Редактировать пользователя</h4>
                     <form action="{{route('admin.user.update', $user->id)}}" method="post" class="col-4">
                         @csrf
                         @method('patch')
@@ -48,6 +48,20 @@
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="form-group">
+                          <input type="hidden" name="user_id" value="{{$user->id}}">
+                            <label>Выберите пользователя</label>
+                            <select class="form-control" name="role">
+                                @foreach($roles as  $id => $role)
+                                    <option value="{{$id}}"
+                                        {{$id == $user->role ? ' selected' : '' }}>
+                                        {{$role}}</option>
+                                @endforeach
+                            </select>
+                            @error('role')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
                         </div>
 
                         <div class="ml-3">
