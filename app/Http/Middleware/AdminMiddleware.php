@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ((int) auth()->user()->role != User::ROLE_ADMIN){
+        if ((int) auth()->user()->role !== User::ROLE_ADMIN){
             abort(404);
         }
         return $next($request);

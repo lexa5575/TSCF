@@ -45,15 +45,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>password</label>
-                                <input type="text" name="password" class="form-control" placeholder="Your password">
-                                @error('password')
-                                <div class="text-danger">Ошибка</div>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label>Выберите роль</label>
                             <select class="form-control" name="role">

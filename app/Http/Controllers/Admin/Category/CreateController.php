@@ -14,4 +14,6 @@ class CreateController extends Controller
         return view('Admin.categories.create');
     }
 
+
+
 }
