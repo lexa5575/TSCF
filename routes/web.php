@@ -16,7 +16,23 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/', 'IndexController');
 });
-Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth','admin', 'verified']], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth']], function () {
+    Route::group(['namespace' => 'Main'], function () {
+        Route::get('/', 'IndexController')->name('personal');
+    });
+    Route::group(['namespace' => 'Liked'], function () {
+        Route::get('/f', 'IndexController')->name('personal.liked');
+        Route::delete('/{{post}}', 'DeleteController')->name('personal.liked.delete');
+    });
+    Route::group(['namespace' => 'Comment'], function () {
+        Route::get('/g', 'IndexController')->name('personal.comment');
+        Route::get('/{comment}/edit', 'EditController')->name('personal.comment.edit');
+        Route::patch('/{comment}/update', 'UpdateController')->name('personal.comment.update');
+        Route::delete('/{comment}', 'DeleteController')->name('personal.comment.delete');
+    });
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
     Route::group(['namespace' => 'Main'], function () {
         Route::get('/', 'IndexController')->name('index');
     });
@@ -31,15 +47,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
         Route::delete('/{post}', 'DeleteController')->name('admin.post.delete');
     });
 
-        Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
-            Route::get('/post', 'IndexController')->name('admin.category.index');
-            Route::get('/create', 'CreateController')->name('admin.category.create');
-            Route::post('/', 'StoreController')->name('admin.category.store');
-            Route::get('/{category}', 'ShowController')->name('admin.category.show');
-            Route::get('/{category}/edit', 'EditController')->name('admin.category.edit');
-            Route::patch('/{category}', 'UpdateController')->name('admin.category.update');
-            Route::delete('/{category}', 'DeleteController')->name('admin.category.delete');
-        });
+    Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
+        Route::get('/post', 'IndexController')->name('admin.category.index');
+        Route::get('/create', 'CreateController')->name('admin.category.create');
+        Route::post('/', 'StoreController')->name('admin.category.store');
+        Route::get('/{category}', 'ShowController')->name('admin.category.show');
+        Route::get('/{category}/edit', 'EditController')->name('admin.category.edit');
+        Route::patch('/{category}', 'UpdateController')->name('admin.category.update');
+        Route::delete('/{category}', 'DeleteController')->name('admin.category.delete');
+    });
 
     Route::group(['namespace' => 'Tag', 'prefix' => 'tags'], function () {
         Route::get('/post', 'IndexController')->name('admin.tag.index');
